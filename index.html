@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pour une personne spéciale ❤️</title>
+  <title>Pour Coretha ❤️</title>
 
   <style>
     * {
@@ -12,131 +12,224 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
-      background:
-        radial-gradient(circle at top, #35204f 0%, #160f25 45%, #08070d 100%);
       color: white;
+      background:
+        radial-gradient(circle at 50% 0%, #4a275c 0%, #1c112b 42%, #07060b 100%);
       overflow-x: hidden;
     }
 
+    /* ÉTOILES */
     .stars {
       position: fixed;
       inset: 0;
-      pointer-events: none;
       overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .star {
       position: absolute;
       width: 3px;
       height: 3px;
-      background: white;
       border-radius: 50%;
+      background: white;
       opacity: 0.7;
       animation: twinkle 3s infinite ease-in-out;
     }
 
     @keyframes twinkle {
       0%, 100% {
-        opacity: 0.2;
-        transform: scale(0.8);
+        opacity: 0.15;
+        transform: scale(0.7);
       }
+
       50% {
         opacity: 1;
         transform: scale(1.5);
       }
     }
 
+    /* CŒURS */
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      font-size: 20px;
+      pointer-events: none;
+      animation: rise 6s linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-110vh) rotate(30deg);
+        opacity: 0;
+      }
+    }
+
+    /* CONTENEUR */
     .container {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
       position: relative;
       z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 16px;
     }
 
     .card {
-      width: min(100%, 650px);
+      width: min(680px, 100%);
+      padding: 42px 28px;
+      border-radius: 30px;
       text-align: center;
-      padding: 40px 28px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 28px;
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.55),
+        inset 0 1px rgba(255,255,255,0.1);
+    }
+
+    /* ENVELOPPE */
+    .envelope-wrapper {
+      perspective: 1000px;
+      margin-bottom: 25px;
     }
 
     .envelope {
-      font-size: 75px;
-      margin-bottom: 20px;
+      font-size: 85px;
+      display: inline-block;
+      cursor: pointer;
       animation: float 3s ease-in-out infinite;
+      transition: 0.5s;
+      user-select: none;
+    }
+
+    .envelope:hover {
+      transform: scale(1.08);
     }
 
     @keyframes float {
       0%, 100% {
         transform: translateY(0);
       }
+
       50% {
         transform: translateY(-12px);
       }
     }
 
     .intro {
-      font-size: 18px;
-      color: #d8cce6;
-      margin-bottom: 12px;
+      color: #d9cce4;
+      font-size: 17px;
+      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: clamp(34px, 8vw, 58px);
-      margin-bottom: 18px;
-      background: linear-gradient(90deg, #fff, #e9b7ff, #fff);
+      font-size: clamp(32px, 8vw, 58px);
+      line-height: 1.1;
+      margin-bottom: 15px;
+
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #f0baff,
+        #ffffff
+      );
+
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
     }
 
-    .subtitle {
-      color: #d8cce6;
-      line-height: 1.7;
-      margin-bottom: 30px;
+    .name {
+      color: #f0c4ff;
+      font-size: clamp(19px, 5vw, 27px);
+      margin-bottom: 18px;
     }
 
-    button {
+    .subtitle {
+      color: #d9cce4;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* BOUTONS */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .music-button {
       border: none;
-      padding: 15px 28px;
+      text-decoration: none;
+      display: inline-block;
+
+      padding: 14px 24px;
       border-radius: 999px;
-      font-size: 16px;
+
+      font-size: 15px;
       font-weight: bold;
+
+      color: #25132e;
+      background: linear-gradient(135deg, #ffffff, #e7b1ff);
+
       cursor: pointer;
-      color: #211129;
-      background: linear-gradient(135deg, #ffffff, #e8b7ff);
+
       box-shadow: 0 10px 30px rgba(225,170,255,0.25);
+
       transition: 0.3s ease;
     }
 
-    button:hover {
+    button:hover,
+    .music-button:hover {
       transform: translateY(-3px) scale(1.03);
     }
 
-    #message {
-      display: none;
-      text-align: left;
-      margin-top: 35px;
-      line-height: 1.9;
-      color: #f6eef9;
-      font-size: 17px;
-      animation: appear 1.5s ease forwards;
+    .music-button {
+      color: white;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    @keyframes appear {
+    /* MESSAGE */
+    #message {
+      display: none;
+      margin-top: 35px;
+      text-align: left;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #f7effa;
+      animation: messageAppear 1.6s ease forwards;
+    }
+
+    @keyframes messageAppear {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(25px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -144,55 +237,71 @@
     }
 
     #message p {
-      margin-bottom: 20px;
+      margin-bottom: 21px;
     }
 
-    .highlight {
+    .separator {
+      text-align: center;
+      color: #dca8f4;
+      font-size: 24px;
+      margin: 25px 0;
+    }
+
+    .quote {
       text-align: center;
       font-size: 23px;
-      color: #f0caff;
-      margin: 28px 0;
+      line-height: 1.5;
+      color: #f0c8ff;
+      margin: 30px 0;
     }
 
     .signature {
       text-align: right;
-      margin-top: 30px;
-      color: #dcb8eb;
+      color: #dcb9e9;
       font-style: italic;
+      margin-top: 30px;
     }
 
-    .heart {
+    .final-heart {
       text-align: center;
-      font-size: 30px;
+      font-size: 38px;
       margin-top: 25px;
-      animation: heartbeat 1.5s infinite;
+      animation: heartbeat 1.4s infinite;
     }
 
     @keyframes heartbeat {
       0%, 100% {
         transform: scale(1);
       }
+
       50% {
-        transform: scale(1.2);
+        transform: scale(1.25);
       }
     }
 
-    .hidden {
-      display: none;
+    .music-note {
+      text-align: center;
+      color: #cdb6d7;
+      font-size: 13px;
+      margin-top: 10px;
     }
 
     @media (max-width: 500px) {
       .card {
-        padding: 32px 20px;
-        border-radius: 22px;
+        padding: 35px 20px;
+        border-radius: 24px;
+      }
+
+      .envelope {
+        font-size: 70px;
       }
 
       #message {
         font-size: 16px;
       }
 
-      .envelope {
-        font-size: 62px;
+      .quote {
+        font-size: 20px;
       }
     }
   </style>
@@ -203,73 +312,124 @@
   <div class="stars" id="stars"></div>
 
   <main class="container">
+
     <section class="card">
 
-      <div class="envelope">💌</div>
+      <div class="envelope-wrapper">
+        <div
+          class="envelope"
+          id="envelope"
+          onclick="openMessage()">
+          💌
+        </div>
+      </div>
 
-      <p class="intro">J’ai quelque chose à te dire...</p>
+      <p class="intro">
+        J’ai quelque chose à te dire...
+      </p>
 
       <h1>Pour toi ❤️</h1>
 
+      <div class="name">
+        KOUKOUI Coretha Donan
+      </div>
+
       <p class="subtitle">
-        Il y a certaines personnes auxquelles on ne pense pas seulement
-        aujourd’hui. Certaines personnes restent importantes, peu importe
-        le temps qui passe.
+        Une petite lettre pour une personne qui mérite
+        quelques mots sincères.
       </p>
 
-      <button onclick="openMessage()">
-        Ouvrir mon message ✨
-      </button>
+      <div class="buttons">
+
+        <button onclick="openMessage()">
+          Ouvrir ma lettre ✨
+        </button>
+
+        <a
+          class="music-button"
+          href="https://www.youtube.com/results?search_query=Dadju+Reine"
+          target="_blank">
+          🎵 Écouter Reine — Dadju
+        </a>
+
+      </div>
+
+      <p class="music-note">
+        La musique s’ouvre dans une nouvelle page.
+      </p>
 
       <div id="message">
 
         <p>
-          Aujourd’hui, j’avais simplement envie de prendre quelques minutes
-          pour te dire quelque chose que je ne dis peut-être pas assez.
+          Aujourd’hui, j’avais simplement envie de prendre quelques
+          minutes pour te dire quelque chose que je ne dis peut-être
+          pas assez.
         </p>
 
         <p>
-          Tu es une personne spéciale pour moi. Une personne qui a une place
-          particulière dans mon cœur et dont la présence, d’une manière ou
-          d’une autre, a compté et compte encore.
+          Coretha, tu es une personne spéciale pour moi.
+          Une personne qui a une place particulière et dont la présence,
+          d’une manière ou d’une autre, a compté et compte encore.
         </p>
 
         <p>
-          Je te souhaite sincèrement de connaître beaucoup de bonheur,
-          de paix, de réussite et de belles surprises. J’espère que les
-          prochains mois t’apporteront de magnifiques souvenirs, de nouveaux
-          projets et surtout beaucoup de raisons de sourire.
+          Je voulais profiter de cette journée pour te rappeler quelque
+          chose : tu mérites sincèrement de belles choses.
         </p>
 
-        <div class="highlight">
-          « Certaines personnes passent dans notre vie,<br>
+        <div class="separator">✦ ✦ ✦</div>
+
+        <p>
+          Je te souhaite énormément de bonheur, de paix, de réussite
+          et de beaux moments. J’espère que cette nouvelle étape de ta
+          vie sera remplie de sourires, de beaux projets, de belles
+          rencontres et de souvenirs que tu garderas longtemps.
+        </p>
+
+        <div class="quote">
+          « Certaines personnes passent dans notre vie,
           d’autres y laissent une trace. »
         </div>
 
         <p>
-          Et toi, tu fais partie de ces personnes dont je garderai toujours
-          quelque chose de précieux. Peu importe où la vie nous emmènera,
-          j’espère que tu continueras à avancer, à croire en toi et à devenir
-          encore plus la personne incroyable que tu es.
+          Et toi, tu fais partie de ces personnes dont on garde quelque
+          chose de précieux. Peu importe le temps qui passe ou la
+          direction que prend la vie, certaines personnes restent
+          importantes.
         </p>
 
         <p>
-          Alors aujourd’hui, je voulais simplement te rappeler que tu mérites
-          de belles choses. Des personnes sincères autour de toi, des moments
-          qui te rendent heureuse, des rêves qui deviennent réalité et une
-          vie dont tu seras fière.
+          J’espère que tu continueras toujours à croire en toi,
+          à avancer malgré les difficultés et à ne jamais oublier
+          la personne que tu es.
         </p>
 
         <p>
-          Profite de cette nouvelle étape, souris beaucoup, prends soin de
-          toi et ne laisse jamais personne te faire oublier ta valeur.
+          Je te souhaite des jours où tu souriras sans raison,
+          des rêves qui deviendront réalité et des personnes sincères
+          autour de toi.
         </p>
 
         <p>
-          Et surtout... merci d’être toi.
+          Prends soin de toi, profite de chaque petit moment et surtout,
+          ne laisse jamais personne te faire oublier ta valeur.
         </p>
 
-        <div class="heart">❤️</div>
+        <p>
+          Et si cette petite page peut te faire sourire ne serait-ce
+          qu’un instant, alors elle aura déjà rempli son rôle.
+        </p>
+
+        <div class="separator">♡</div>
+
+        <p style="text-align:center;">
+          Pour une personne spéciale,<br>
+          une petite lettre qui restera ici rien que pour toi.
+        </p>
+
+        <div class="final-heart">
+          ❤️
+        </div>
 
         <div class="signature">
           Avec beaucoup de sincérité,<br>
@@ -279,41 +439,102 @@
       </div>
 
     </section>
+
   </main>
 
   <script>
+
+    /* ÉTOILES */
     const starsContainer = document.getElementById("stars");
 
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 100; i++) {
+
       const star = document.createElement("div");
+
       star.className = "star";
 
       star.style.left = Math.random() * 100 + "%";
       star.style.top = Math.random() * 100 + "%";
-      star.style.animationDelay = Math.random() * 3 + "s";
+      star.style.animationDelay =
+        Math.random() * 3 + "s";
 
       starsContainer.appendChild(star);
     }
 
-    function openMessage() {
-      const message = document.getElementById("message");
-      const button = document.querySelector("button");
-      const envelope = document.querySelector(".envelope");
 
-      message.style.display = "block";
-      button.style.display = "none";
+    /* OUVERTURE DU MESSAGE */
+    function openMessage() {
+
+      const message =
+        document.getElementById("message");
+
+      const envelope =
+        document.getElementById("envelope");
+
+      const buttons =
+        document.querySelector(".buttons");
+
       envelope.textContent = "💖";
 
+      envelope.style.animation = "none";
+
+      message.style.display = "block";
+
+      buttons.style.display = "none";
+
+      createHearts();
+
       setTimeout(() => {
+
         message.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-      }, 100);
+
+      }, 200);
     }
+
+
+    /* CŒURS QUI MONTENT */
+    function createHearts() {
+
+      const hearts = ["❤️", "💗", "💖", "💕", "✨"];
+
+      for (let i = 0; i < 18; i++) {
+
+        setTimeout(() => {
+
+          const heart =
+            document.createElement("div");
+
+          heart.className = "floating-heart";
+
+          heart.textContent =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+          heart.style.left =
+            Math.random() * 100 + "%";
+
+          heart.style.fontSize =
+            (15 + Math.random() * 18) + "px";
+
+          heart.style.animationDuration =
+            (4 + Math.random() * 4) + "s";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 8000);
+
+        }, i * 180);
+      }
+    }
+
   </script>
 
 </body>
 </html>
+
 
 
